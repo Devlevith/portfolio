@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levinni Th. | Criador Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #050505;
+            --card: rgba(22, 22, 22, 0.7);
+            --purple: #8b5cf6;
+            --purple-hover: #a78bfa;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            background-image: radial-gradient(circle at top right, #1e1b4b, transparent),
+                              radial-gradient(circle at bottom left, #1e1b4b, transparent);
+            background-attachment: fixed;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px; /* Aumentado para Desktop */
+        }
+
+        /* Perfil Centralizado */
+        .profile {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--purple);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile img:hover {
+            transform: scale(1.05);
+        }
+
+.profile h1 {
+    margin: 20px 0 8px;
+    font-size: 2.5rem; /* Aumentei um pouco */
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -1px; /* Toque de design moderno */
+    opacity: 0.95;
+}
+
+        .profile p {
+            font-size: 1rem;
+            color: var(--muted);
+            letter-spacing: 1px;
+        }
+
+        /* Grid de Seções para Desktop */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .section h2 {
+            font-size: 0.8rem;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::after {
+            content: "";
+            height: 1px;
+            background: var(--border);
+            flex-grow: 1;
+        }
+
+        /* Cards Estilizados */
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .link i {
+            font-size: 1.2rem;
+            color: var(--purple);
+            transition: 0.3s;
+        }
+
+        .card:hover .link i {
+            transform: translateX(5px);
+            color: white;
+        }
+
+        /* O que eu faço - Lista */
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .skill-item i {
+            width: 20px;
+            color: var(--purple);
+        }
+
+        /* Rodapé Fixo (Anúncio) */
+        #fixed-ad {
+            position: fixed;
+            bottom: -100px; /* Escondido inicialmente */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: linear-gradient(90deg, #4c1d95, #8b5cf6);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            z-index: 1000;
+            transition: bottom 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        #fixed-ad.show { bottom: 30px; }
+
+        .ad-content { display: flex; align-items: center; gap: 12px; }
+        .ad-content i { font-size: 1.5rem; }
+        
+        .ad-link {
+            background: white;
+            color: black;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .ad-link:hover { opacity: 0.9; transform: scale(1.05); }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-bottom: 100px;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="profile">
+        <img src="LogoV.jpg" alt="Levinni Th">
+        <h1>Levinni Th.</h1>
+        <p><i class="fa-solid fa-code"></i> Criador Digital • Dev • Designer</p>
+    </div>
+
+    <div class="main-grid">
+        <div class="left-col">
+            <div class="section">
+                <h2>Redes Sociais</h2>
+
+                <div class="card">
+                    <a class="link" href="https://www.twitch.tv/ppo_levi" target="_blank">
+                        Twitch <i class="fa-brands fa-twitch"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a class="link" href="https://www.youtube.com/@Levini9" target="_blank">
+                        YouTube <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a class="link" href="https://www.instagram.com/levinnith/" target="_blank">
+                        Instagram <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a class="link" href="https://levinnith.itch.io/" target="_blank">
+                        Itch.io <i class="fa-brands fa-itch-io"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Destaque</h2>
+                <div class="card" style="border-left: 4px solid var(--purple);">
+                    <div style="margin-bottom: 10px; font-weight: bold;">Middle Creative</div>
+                    <p style="font-size:0.85rem; color:var(--muted); margin-bottom: 15px;">
+                        Coletivo criativo focado em convites, artes e vídeos.
+                    </p>
+                    <a class="link" href="https://www.instagram.com/midlle_creative/" target="_blank">
+                        Conhecer Projeto <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div class="section">
+                <h2>Especialidades</h2>
+                <div class="card"><div class="skill-item"><i class="fa-solid fa-gamepad"></i> Desenvolvimento de jogos</div></div>
+                <div class="card"><div class="skill-item"><i class="fa-solid fa-clapperboard"></i> Edição de vídeo & conteúdo</div></div>
+                <div class="card"><div class="skill-item"><i class="fa-solid fa-palette"></i> Design & artes digitais</div></div>
+                <div class="card"><div class="skill-item"><i class="fa-solid fa-terminal"></i> Programação & projetos</div></div>
+            </div>
+
+            <div class="section">
+                <h2>Atividade Recente</h2>
+                <div class="card" id="feed">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fa-regular fa-copyright"></i> Levinni Th • Conteúdo Autoral 2026
+    </footer>
+
+</div>
+
+<div id="fixed-ad">
+    <div class="ad-content">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <div>
+            <div style="font-size: 0.9rem; font-weight: bold;">Middle Creative</div>
+            <div style="font-size: 0.7rem; opacity: 0.9;">Artes e convites profissionais</div>
+        </div>
+    </div>
+    <a href="https://www.instagram.com/midlle_creative/" class="ad-link" target="_blank">VER AGORA</a>
+</div>
+
+<script>
+    // Configuração do Feed (Sem Emojis)
+    const feed = [
+        { icon: "fa-gamepad", text: "Protótipo de jogo em desenvolvimento" },
+        { icon: "fa-video", text: "Clip novo da live na Twitch" },
+        { icon: "fa-brain", text: "Estudando Godot e arquitetura" },
+        { icon: "fa-pen-nib", text: "Arte experimental em andamento" }
+    ];
+
+    const feedContainer = document.getElementById("feed");
+    feed.forEach(item => {
+        const div = document.createElement("div");
+        div.style.marginBottom = "12px";
+        div.style.fontSize = "0.85rem";
+        div.style.color = "var(--muted)";
+        div.innerHTML = `<i class="fa-solid ${item.icon}" style="margin-right:10px; color:var(--purple)"></i> ${item.text}`;
+        feedContainer.appendChild(div);
+    });
+
+    // Lógica do Anúncio (2 vezes, a cada 15 min, por 1.5 min)
+    const adElement = document.getElementById('fixed-ad');
+    let displayCount = 0;
+    const maxDisplays = 2;
+    const intervalTime = 15 * 60 * 1000; // 15 minutos
+    const durationTime = 1.5 * 60 * 1000; // 1.5 minutos
+
+    function showAd() {
+        if (displayCount < maxDisplays) {
+            adElement.classList.add('show');
+            displayCount++;
+
+            // Esconde após 1 minuto e meio
+            setTimeout(() => {
+                adElement.classList.remove('show');
+            }, durationTime);
+        } else {
+            clearInterval(adInterval); // Para o loop após 2 vezes
+        }
+    }
+
+    // Inicia o ciclo após os primeiros 15 minutos (ou mude para showAd() se quiser imediato)
+    const adInterval = setInterval(showAd, intervalTime);
+</script>
+
+</body>
+</html>
